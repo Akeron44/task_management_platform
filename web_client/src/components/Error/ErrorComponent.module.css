@@ -1,0 +1,21 @@
+.error_section {
+  width: 100%;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999999;
+}
+
+.error_container {
+  width: 60%;
+}
+
+.error_message {
+  color: rgb(244, 103, 103);
+  margin-bottom: 2rem;
+}

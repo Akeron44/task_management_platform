@@ -1,0 +1,127 @@
+.loginContainer {
+  text-align: center;
+  animation: fadeIn 0.3s ease-out;
+  width: 100%;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a2b4c;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #1a2b4c, #2c4b7c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 35px;
+}
+
+.form {
+  max-width: 100%;
+}
+
+/* Override ant design's default form layout */
+.form :global(.ant-form-item) {
+  margin-bottom: 24px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.form :global(.ant-form-item-control-input) {
+  width: 100%;
+  max-width: 100%;
+}
+
+.form :global(.ant-col) {
+  flex: 1;
+  max-width: 100%;
+  width: 100%;
+}
+
+.input {
+  height: 48px;
+  border-radius: 10px;
+  border: 2px solid #eef1f8;
+  transition: all 0.3s ease;
+  padding-left: 45px !important;
+  width: 100%;
+}
+
+.input:hover,
+.input:focus {
+  border-color: #1a2b4c;
+  box-shadow: 0 0 0 2px rgba(26, 43, 76, 0.1);
+}
+
+.inputIcon {
+  color: #1a2b4c;
+  opacity: 0.8;
+}
+
+.forgotPassword {
+  text-align: right;
+  margin: -10px 0 20px;
+  color: #1a2b4c;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.forgotPassword:hover {
+  color: #2c4b7c;
+  text-decoration: underline;
+}
+
+.submitButton {
+  height: 48px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #1a2b4c, #2c4b7c);
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.submitButton:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px rgba(26, 43, 76, 0.2);
+  background: linear-gradient(135deg, #1a2b4c, #2c4b7c) !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 24px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+
+  .input {
+    height: 44px;
+  }
+
+  .submitButton {
+    height: 44px;
+  }
+}

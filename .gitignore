@@ -1,0 +1,69 @@
+# Dependencies
+api/node_modules
+web_client/node_modules
+
+# Build outputs
+api/dist
+web_client/dist
+web_client/dist-ssr
+*.local
+
+# Environment files
+.envz
+.env.*
+!.env.example
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# IDE - VSCode
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# IDE - Other
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Prisma
+api/prisma/migrations/
+api/prisma/*.db
+api/prisma/.env
+
+# Testing
+api/coverage
+web_client/coverage
+
+# Temporary files
+*.tmp
+*.temp
+.cache
+
+# Build files
+*.tsbuildinfo
+.next
+.nuxt
+.output
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+

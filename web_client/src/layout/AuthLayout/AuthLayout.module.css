@@ -1,0 +1,64 @@
+.authContainer {
+  min-height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #1a2b4c 0%, #2c4b7c 100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.authContent {
+  background: rgba(255, 255, 255, 0.98);
+  padding: 40px 50px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  margin: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logoText {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a2b4c;
+  letter-spacing: 1px;
+}
+
+.switchButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-weight: 500;
+  color: #1a2b4c;
+  transition: all 0.3s ease;
+}
+
+.switchButton:hover {
+  color: #2c4b7c;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 480px) {
+  .authContent {
+    padding: 30px 25px;
+    margin: 15px;
+  }
+
+  .switchButton {
+    top: 15px;
+    right: 15px;
+  }
+}

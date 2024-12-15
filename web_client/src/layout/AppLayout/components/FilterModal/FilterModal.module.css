@@ -1,0 +1,26 @@
+.filterContainer {
+  padding: 16px 0;
+}
+
+.filterGroup {
+  margin-bottom: 24px;
+}
+
+.filterGroup:last-child {
+  margin-bottom: 0;
+}
+
+.filterGroup label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #262626;
+}
+
+.filterSelect {
+  width: 100%;
+}
+
+.filterDate {
+  width: 100%;
+}

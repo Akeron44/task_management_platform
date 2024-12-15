@@ -1,0 +1,24 @@
+.taskList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  padding: 20px 0;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 48px 0;
+  color: #666;
+}
+
+.emptyStateIcon {
+  font-size: 48px;
+  color: #1a2b4c;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.emptyStateText {
+  font-size: 16px;
+  margin-bottom: 16px;
+}
