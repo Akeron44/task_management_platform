@@ -16,18 +16,75 @@ import { UpdateTaskDto } from './dto/update-task.dto';
 import { JwtAuthGuard } from '../../common/guards/jwt.guard';
 import { Request } from 'express';
 import { controller_path } from 'src/common/constants/controller-path';
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 
+@ApiTags(controller_path.TASKS.INDEX)
+@ApiBearerAuth('JWT-auth')
 @Controller(controller_path.TASKS.INDEX)
 @UseGuards(JwtAuthGuard)
 export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
   @Post()
+  @ApiOperation({ summary: 'Create a task' }) 
+  @ApiBody({ type: CreateTaskDto }) 
   create(@Body() createTaskDto: CreateTaskDto, @Req() req: Request) {
     return this.taskService.create(createTaskDto, req.user['id']);
   }
 
   @Get()
+  @ApiOperation({ summary: 'Fetch tasks' }) 
+  @ApiQuery({
+    name: 'priority',
+    required: false,
+    description: 'Filter by task priority. Can be one of: HIGH, MEDIUM, LOW',
+    isArray: true, 
+  })
+  @ApiQuery({
+    name: 'status',
+    required: false,
+    description: 'Filter by task status. Can be one of: PENDING, IN_PROGRESS, COMPLETED, CANCELLED',
+    isArray: true, 
+  })
+  @ApiQuery({
+    name: 'dueDateStart',
+    required: false,
+    description: 'Start date for filtering tasks by due date. Format: YYYY-MM-DD',
+  })
+  @ApiQuery({
+    name: 'dueDateEnd',
+    required: false,
+    description: 'End date for filtering tasks by due date. Format: YYYY-MM-DD',
+  })
+  @ApiQuery({
+    name: 'sortBy',
+    required: false,
+    description: 'Sort tasks by the given field. Can be one of: priority, status, dueDate, none',
+  })
+  @ApiQuery({
+    name: 'sort',
+    required: false,
+    description: 'Sorting order. Can be: asc or desc',
+    default: 'none'
+  })
+  @ApiQuery({
+    name: 'skip',
+    required: true,
+    description: 'Pagination: number of tasks to skip',
+    default: 0
+  })
+  @ApiQuery({
+    name: 'take',
+    required: true,
+    description: 'Pagination: number of tasks to return',
+    default: 10
+  })
+  @ApiQuery({
+    name: 'myTasks',
+    required: true,
+    description: 'Filter to only show tasks belonging to the logged-in user. true/false',
+    default: false
+  })
   async findAll(
     @Req() req: Request,
     @Query('priority')
@@ -78,6 +135,35 @@ export class TaskController {
   }
 
   @Get(controller_path.TASKS.STATISTICS)
+  @ApiOperation({ summary: 'Fetch tasks statistics' }) 
+  @ApiQuery({
+    name: 'priority',
+    required: false,
+    description: 'Filter by task priority. Can be one of: HIGH, MEDIUM, LOW',
+    isArray: true, 
+  })
+  @ApiQuery({
+    name: 'status',
+    required: false,
+    description: 'Filter by task status. Can be one of: PENDING, IN_PROGRESS, COMPLETED, CANCELLED',
+    isArray: true, 
+  })
+  @ApiQuery({
+    name: 'dueDateStart',
+    required: false,
+    description: 'Start date for filtering tasks by due date. Format: YYYY-MM-DD',
+  })
+  @ApiQuery({
+    name: 'dueDateEnd',
+    required: false,
+    description: 'End date for filtering tasks by due date. Format: YYYY-MM-DD',
+  })
+  @ApiQuery({
+    name: 'myTasks',
+    required: true,
+    description: 'Filter to only show tasks belonging to the logged-in user. true/false',
+    default: false
+  })
   getStats(
     @Req() req: Request,
     @Query('priority')
@@ -119,11 +205,13 @@ export class TaskController {
   }
 
   @Get(controller_path.TASKS.TASK_ID)
+  @ApiOperation({ summary: 'Fetch a single task' }) 
   findOne(@Param('id') id: string, @Req() req: Request) {
     return this.taskService.findOne(id, req.user['id']);
   }
 
   @Patch(controller_path.TASKS.TASK_ID)
+  @ApiOperation({ summary: 'Update a task' }) 
   update(
     @Param('id') id: string,
     @Body() updateTaskDto: UpdateTaskDto,
@@ -133,16 +221,19 @@ export class TaskController {
   }
 
   @Delete(controller_path.TASKS.TASK_ID)
+  @ApiOperation({ summary: 'Soft delete a task' }) 
   remove(@Param('id') id: string, @Req() req: Request) {
     return this.taskService.remove(id, req.user['id']);
   }
 
   @Patch(controller_path.TASKS.RESTORE)
+  @ApiOperation({ summary: 'Restore a soft deleted task' }) 
   restore(@Param('id') id: string, @Req() req: Request) {
     return this.taskService.restore(id, req.user['id']);
   }
 
   @Delete(controller_path.TASKS.HARD_DELETE)
+  @ApiOperation({ summary: 'Hard delete a task' }) 
   hardDelete(@Param('id') id: string, @Req() req: Request) {
     return this.taskService.hardDelete(id, req.user['id']);
   }

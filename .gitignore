@@ -1,6 +1,7 @@
 # Dependencies
 api/node_modules
 web_client/node_modules
+terraform/
 
 # Build outputs
 api/dist
