@@ -15,7 +15,7 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { JwtAuthGuard } from '../../common/guards/jwt.guard';
 import { Request } from 'express';
-import { controller_path } from 'src/common/constants/controller-path';
+import { controller_path } from '../../common/constants/controller-path';
 import { ApiBearerAuth, ApiBody, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @ApiTags(controller_path.TASKS.INDEX)

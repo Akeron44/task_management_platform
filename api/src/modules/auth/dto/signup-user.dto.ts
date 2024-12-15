@@ -9,7 +9,7 @@ import {
   Max,
   Matches,
 } from 'class-validator';
-import { error_messages } from 'src/common/constants/error-messages';
+import { error_messages } from '../../../common/constants/error-messages';
 
 export class SignupUserDto {
   @ApiProperty()

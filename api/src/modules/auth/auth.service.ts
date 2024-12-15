@@ -6,7 +6,7 @@ import {
 import { LoginUserDto } from './dto/login-user.dto';
 import { AuthHelper } from './helpers/auth.helper';
 import { SignupUserDto } from './dto/signup-user.dto';
-import { error_messages } from 'src/common/constants/error-messages';
+import { error_messages } from '../../common/constants/error-messages';
 import { UserDal } from '../user/dal/user.dal';
 
 @Injectable()

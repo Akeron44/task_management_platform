@@ -5,7 +5,7 @@ import {
   TaskNotFoundException,
   TaskAlreadyDeletedException,
 } from '../../../common/exceptions/task.exception';
-import { ErrorDal } from 'src/common/dal/error.dal';
+import { ErrorDal } from '../../../common/dal/error.dal';
 
 @Injectable()
 export class TaskDal {

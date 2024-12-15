@@ -8,7 +8,7 @@ import {
   MinDate,
 } from 'class-validator';
 import { Priority, TaskStatus } from '@prisma/client';
-import { error_messages } from 'src/common/constants/error-messages';
+import { error_messages } from '../../../common/constants/error-messages';
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 

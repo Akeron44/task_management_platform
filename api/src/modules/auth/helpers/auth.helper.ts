@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { randomBytes, scrypt } from 'crypto';
-import { error_messages } from 'src/common/constants/error-messages';
+import { error_messages } from '../../../common/constants/error-messages';
 import { promisify } from 'util';
 
 interface UserGenerateToken {

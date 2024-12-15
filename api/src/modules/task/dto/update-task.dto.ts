@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Priority, TaskStatus } from '@prisma/client';
 import { Type } from 'class-transformer';
 import { MinLength, MaxLength, IsString, IsEnum, IsDate, MinDate, IsOptional } from 'class-validator';
-import { error_messages } from 'src/common/constants/error-messages';
+import { error_messages } from '../../../common/constants/error-messages';
 
 
   export class UpdateTaskDto {
