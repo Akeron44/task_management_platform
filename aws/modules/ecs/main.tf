@@ -150,7 +150,7 @@ resource "aws_lb_listener" "name" {
 
 resource "aws_lb_target_group" "ecs_tg" {
   vpc_id      = "vpc-072bcbc3be2e0ec63"
-  name        = "ecs-target-group"
+  name        = "akeron-ecs-target-group"
   port        = 80
   protocol    = "HTTP"
   target_type = "ip"
