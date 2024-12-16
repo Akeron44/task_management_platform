@@ -110,7 +110,7 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
     name      = "akeron-ecs-task"
     image     = "863872515231.dkr.ecr.eu-central-1.amazonaws.com/akeronecr:1.0.0"
     cpu       = 0
-    essential = "true"
+    essential = true
     portMappings = [{
       name          = "api-5000-tcp"
       containerPort = 4000
