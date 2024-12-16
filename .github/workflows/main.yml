@@ -28,6 +28,7 @@ jobs:
           aws configure set aws_default_output_format "json"
       - name: Build the ecr
         working-directory: ./aws
+        shell: bash
         run: |
           terraform init
           terraform state pull
