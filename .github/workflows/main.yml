@@ -18,7 +18,7 @@ jobs:
           npm i  --force
           npx vitest run
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag akerondocker/testrop:1.0.0
+        run: docker build . --file .api/Dockerfile --tag akerondocker/testrop:1.0.0
       - name: push image to docker hub
         run: |
           docker login -u akerondocker -p ${{ secrets.SECRET_TOKEN_HUB }}
