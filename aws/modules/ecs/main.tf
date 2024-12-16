@@ -129,8 +129,8 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
       essential = true
       portMappings = [
         {
-          containerPort = 4000
-          hostPort      = 4000
+          containerPort = 5000
+          hostPort      = 5000
           protocol      = "tcp"
         }
       ]
@@ -197,5 +197,3 @@ resource "aws_ecs_service" "ecs_service" {
 
   depends_on = [aws_autoscaling_group.ecs_asg]
 }
-
-
