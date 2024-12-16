@@ -111,7 +111,7 @@ resource "aws_launch_template" "name1" {
     }
   }
 
-  user_data = filebase64("./modules/ec2/ecs.sh")
+  user_data = filebase64("./modules/ecs/ecs.sh")
 }
 
 
