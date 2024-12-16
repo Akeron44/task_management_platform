@@ -1,1 +1,49 @@
-
+on:
+  push:
+    branches: ["main"]
+jobs:
+  build_docker_image_ecr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: run api tests
+        working-directory: ./api
+        run: |
+          npm cache clean --force
+          npm install --legacy-peer-deps
+          npm run test
+      - name: run web_client tests
+        working-directory: ./web_client
+        run: |
+          npm i  --force
+          npx vitest run
+          - name: Build the Docker image
+          run: docker build . --file Dockerfile --tag akerondocker/testrop:1.0.0
+      - name: push image to docker hub
+        run: |
+          docker login -u akerondocker -p ${{ secrets.SECRET_TOKEN_HUB }}
+          docker push akerondocker/testrop:1.0.0
+      - name: log in to aws
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set aws_default_region_name ${{ secrets.AWS_DEFAULT_REGION_NAME }}
+          aws configure set aws_default_output_format "json"
+      - name: Build the ecr
+        working-directory: ./aws
+        run: |
+          terraform init
+          terraform state pull
+          terraform apply -auto-approve -target module.ecr
+      - name: Push image to ecr
+        run: |
+          aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 863872515231.dkr.ecr.eu-central-1.amazonaws.com
+          docker build -t akeronecr .
+          docker tag akeronecr:latest 863872515231.dkr.ecr.eu-central-1.amazonaws.com/akeronecr:latest
+          docker push 863872515231.dkr.ecr.eu-central-1.amazonaws.com/akeronecr:latest
+      - name: Create RDS Database
+        working-directory: ./aws
+        run: terraform apply -auto-approve -target module.rds
+      - name: Create the cluster
+        working-directory: ./aws
+        run: terraform apply -auto-approve -target module.ecs
