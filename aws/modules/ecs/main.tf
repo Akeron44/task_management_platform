@@ -137,7 +137,7 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
       environment = [
         {
           name  = "PORT"
-          value = 4000
+          value = "4000"
         },
         {
           name  = "POSTGRES_USER"
