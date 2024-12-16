@@ -196,7 +196,7 @@ resource "aws_ecs_task_definition" "service" {
   family = "akeron-task"
 
   container_definitions = jsonencode([{
-    "name" : "geri-task",
+    "name" : "akeron-task",
     "image" : "863872515231.dkr.ecr.eu-central-1.amazonaws.com/akeronecr:1.0.0",
     "cpu" : 0,
     "portMappings" : [
