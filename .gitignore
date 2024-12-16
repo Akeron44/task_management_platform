@@ -1,7 +1,6 @@
 # Dependencies
 api/node_modules
 web_client/node_modules
-aws/
 
 # Build outputs
 api/dist
