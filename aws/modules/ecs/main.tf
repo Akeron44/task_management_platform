@@ -163,7 +163,7 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
       options = {
         awslogs-group       = "/ecs/akeron-ecs-task",
         mode                = "non-blocking",
-        awslogsCreateGroup  = true,
+        awslogsCreateGroup  = "true",
         maxBufferSize       = "25m",
         awslogsRegion       = "eu-central-1",
         awslogsStreamPrefix = "ecs"
