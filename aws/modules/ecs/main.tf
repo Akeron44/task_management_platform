@@ -1,3 +1,5 @@
+
+
 resource "aws_launch_template" "ecs_lt" {
   name_prefix            = "ecs-template"
   image_id               = "ami-06e21f90b3dce3315"
@@ -179,9 +181,8 @@ resource "aws_ecs_service" "ecs_service" {
   desired_count   = 1
 
   network_configuration {
-    subnets          = ["subnet-048ed615c746deb83", "subnet-0c446972c4be90650", "subnet-0a886674953f327bc"]
-    security_groups  = ["sg-0943ad0b8875a7e25"]
-    assign_public_ip = true
+    subnets         = ["subnet-048ed615c746deb83", "subnet-0c446972c4be90650", "subnet-0a886674953f327bc"]
+    security_groups = ["sg-0943ad0b8875a7e25"]
   }
 
   force_new_deployment = true
