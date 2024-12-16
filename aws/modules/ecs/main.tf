@@ -70,13 +70,13 @@ resource "aws_lb_listener" "ecs_alb_listener" {
 
 resource "aws_lb_target_group" "ecs_tg" {
   name        = "akeron-ecs-target-group"
-  port        = 80
+  port        = 4000
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = "vpc-072bcbc3be2e0ec63"
 
   health_check {
-    path = "/health"
+    path = "/"
   }
 }
 
@@ -136,6 +136,10 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
       ]
       environment = [
         {
+          name  = "PORT",
+          value = 4000
+        },
+        {
           name  = "POSTGRES_USER"
           value = var.username
         },
@@ -192,7 +196,7 @@ resource "aws_ecs_service" "ecs_service" {
   load_balancer {
     target_group_arn = aws_lb_target_group.ecs_tg.arn
     container_name   = "akerontask"
-    container_port   = 5000
+    container_port   = 4000
   }
 
   depends_on = [aws_autoscaling_group.ecs_asg]
