@@ -1,6 +1,11 @@
+
+resource "aws_ecs_cluster" "ecs_cluster" {
+  name = "akeron-ecs-cluster"
+}
+
 resource "aws_launch_template" "ecs_lt" {
   name_prefix   = "ecs-template"
-  image_id      = "ami-0b5673b5f6e8f7fa7"
+  image_id      = "ami-062c116e449466e7f"
   instance_type = "t3.micro"
 
   iam_instance_profile {
@@ -22,13 +27,12 @@ resource "aws_launch_template" "ecs_lt" {
     }
   }
 
-  user_data = filebase64("${path.module}/ecs.sh")
+  user_data = filebase64("./modules/ecs/ecs.sh")
 }
 
 resource "aws_autoscaling_group" "ecs_asg" {
-  desired_capacity    = 1
-  max_size            = 2
   min_size            = 1
+  max_size            = 3
   vpc_zone_identifier = ["subnet-048ed615c746deb83", "subnet-0c446972c4be90650", "subnet-0a886674953f327bc"]
 
   launch_template {
@@ -39,13 +43,12 @@ resource "aws_autoscaling_group" "ecs_asg" {
 }
 
 resource "aws_lb" "ecs_alb" {
-  name               = "akeron-ecs-alb"
-  internal           = false
+  name               = "akeron-alb"
   load_balancer_type = "application"
   subnets            = ["subnet-048ed615c746deb83", "subnet-0c446972c4be90650"]
 
   tags = {
-    Name = "akeron-ecs-alb"
+    Name = "akeron-alb"
   }
 }
 
@@ -61,19 +64,15 @@ resource "aws_lb_listener" "ecs_alb_listener" {
 }
 
 resource "aws_lb_target_group" "ecs_tg" {
+  vpc_id      = "vpc-072bcbc3be2e0ec63"
   name        = "akeron-ecs-target-group"
   port        = 80
   protocol    = "HTTP"
   target_type = "ip"
-  vpc_id      = "vpc-072bcbc3be2e0ec63"
 
   health_check {
     path = "/"
   }
-}
-
-resource "aws_ecs_cluster" "ecs_cluster" {
-  name = "akeron-ecs-cluster"
 }
 
 resource "aws_ecs_capacity_provider" "ecs_capacity_provider" {
@@ -107,10 +106,9 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
   family = "akeron-ecs-task"
 
   container_definitions = jsonencode([{
-    name      = "akeron-ecs-task"
-    image     = "863872515231.dkr.ecr.eu-central-1.amazonaws.com/akeronecr:1.0.0"
-    cpu       = 0
-    essential = true
+    name  = "akeron-ecs-task"
+    image = "863872515231.dkr.ecr.eu-central-1.amazonaws.com/akeronecr:1.0.0"
+    cpu   = 0
     portMappings = [{
       name          = "api-5000-tcp"
       containerPort = 4000
@@ -118,6 +116,7 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
       protocol      = "tcp"
       appProtocol   = "http"
     }],
+    essential = true
     environment = [
       {
         name  = "PORT"
@@ -167,11 +166,11 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
     },
     "systemControls" : []
   }])
-  network_mode             = "awsvpc"
   execution_role_arn       = "arn:aws:iam::863872515231:role/ecsTaskExecutionRole"
-  cpu                      = 1024
-  memory                   = 204
   requires_compatibilities = ["EC2"]
+  network_mode             = "awsvpc"
+  cpu                      = "1024"
+  memory                   = "205"
 }
 
 resource "aws_ecs_service" "ecs_service" {
