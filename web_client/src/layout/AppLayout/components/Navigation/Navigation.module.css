@@ -1,0 +1,92 @@
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.menuToggleButton {
+  display: none;
+}
+
+.pageTitle {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a2b4c;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.searchBar {
+  width: 300px;
+}
+
+.searchBar :global(.ant-input-affix-wrapper) {
+  border-radius: 8px;
+  border: 2px solid #eef1f8;
+  transition: all 0.3s ease;
+}
+
+.searchBar :global(.ant-input-affix-wrapper:hover),
+.searchBar :global(.ant-input-affix-wrapper:focus) {
+  border-color: #1a2b4c;
+  box-shadow: 0 0 0 2px rgba(26, 43, 76, 0.1);
+}
+
+.addButton {
+  height: 40px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1a2b4c, #2c4b7c);
+  color: white;
+  border: none;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.addButton:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(26, 43, 76, 0.2);
+}
+
+.filterButton {
+  height: 40px;
+  border-radius: 8px;
+  border: 2px solid #eef1f8;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.filterButton:hover {
+  border-color: #1a2b4c;
+  color: #1a2b4c;
+}
+
+@media (max-width: 768px) {
+  .navigation {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+  .menuToggleButton {
+    display: block;
+  }
+
+  .searchBar {
+    width: 100%;
+  }
+
+  .actions {
+    justify-content: flex-end;
+  }
+}

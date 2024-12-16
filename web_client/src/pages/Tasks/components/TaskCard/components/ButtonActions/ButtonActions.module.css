@@ -1,0 +1,19 @@
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.actionButton {
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #eef1f8;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #666;
+}
+
+.actionButton:hover {
+  background: #f5f7fb;
+  color: #1a2b4c;
+}

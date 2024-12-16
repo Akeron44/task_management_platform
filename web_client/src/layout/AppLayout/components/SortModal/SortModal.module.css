@@ -1,0 +1,18 @@
+.sortContainer {
+  padding: 16px 0;
+}
+
+.sortGroup {
+  margin-bottom: 24px;
+}
+
+.sortGroup:last-child {
+  margin-bottom: 0;
+}
+
+.sortGroup label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: 500;
+  color: #262626;
+}

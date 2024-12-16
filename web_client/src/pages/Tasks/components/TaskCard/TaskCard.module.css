@@ -1,0 +1,121 @@
+.taskCard {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eef1f8;
+  transition: all 0.3s ease;
+}
+
+.taskCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a2b4c;
+  margin-right: 12px;
+}
+
+.priority {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.priority.high {
+  background: #ffebee;
+  color: #d32f2f;
+}
+
+.priority.medium {
+  background: #fff3e0;
+  color: #f57c00;
+}
+
+.priority.low {
+  background: #e8f5e9;
+  color: #388e3c;
+}
+
+.description {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #eef1f8;
+}
+
+.dueDate {
+  display: flex;
+  align-items: center;
+  color: #666;
+  font-size: 13px;
+}
+
+.dateIcon {
+  margin-right: 6px;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.unCompleteButton {
+  background-color: #fff;
+  color: #111;
+}
+
+.completeButton {
+  background-color: #388e3c;
+  color: #fff;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.statusDot.pending {
+  background: #f57c00;
+}
+
+.statusDot.in_progress {
+  background: #1976d2;
+}
+
+.statusDot.completed {
+  background: #388e3c;
+}
+.statusDot.cancelled {
+  background: #c30606;
+}
+
+.statusText {
+  font-size: 13px;
+  color: #666;
+}
