@@ -136,10 +136,6 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
       ]
       environment = [
         {
-          name  = "PORT"
-          value = 4000
-        },
-        {
           name  = "POSTGRES_USER"
           value = var.username
         },
@@ -152,21 +148,17 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
           value = var.db_name
         },
         {
-          name  = "POSTGRES_HOST"
+          name  = "DATABASE_HOST"
           value = var.db_host
         },
         {
-          name  = "POSTGRES_PORT"
+          name  = "DATABASE_PORT"
           value = var.port
         },
         {
-          name  = "TOKEN_SECRET_KEY"
-          value = "task_management_db_secret_key"
+          name  = "NODE_ENV"
+          value = "production"
         },
-        {
-          name  = "DATABASE_URL",
-          value = "postgresql://akeron:Pcvinpostgres@postgresakeron.cbjrqddvgoeg.eu-central-1.rds.amazonaws.com:5432/akerondatabase"
-        }
       ]
     }
   ])
