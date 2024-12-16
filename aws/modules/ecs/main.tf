@@ -156,20 +156,20 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
         value = "postgresql://akeron:Pcvinpostgres@postgresakeron.cbjrqddvgoeg.eu-central-1.rds.amazonaws.com:5432/akerondatabase"
       }
     ],
-    mountPoints = []
-    volumesFrom = []
-    logConfiguration = {
-      logDriver = "awslogs",
-      options = {
-        awslogs-group       = "/ecs/akeron-ecs-task",
-        mode                = "non-blocking",
-        awslogsCreateGroup  = "true",
-        maxBufferSize       = "25m",
-        awslogs-region      = "eu-central-1",
-        awslogsStreamPrefix = "ecs"
-      }
-    }
-    systemControls = []
+    # mountPoints = []
+    # volumesFrom = []
+    # logConfiguration = {
+    #   logDriver = "awslogs",
+    #   options = {
+    #     awslogs-group       = "/ecs/akeron-ecs-task",
+    #     mode                = "non-blocking",
+    #     awslogsCreateGroup  = "true",
+    #     maxBufferSize       = "25m",
+    #     awslogs-region      = "eu-central-1",
+    #     awslogsStreamPrefix = "ecs"
+    #   }
+    # }
+    # systemControls = []
   }])
 }
 
