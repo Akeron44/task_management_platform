@@ -165,7 +165,7 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
         mode                = "non-blocking",
         awslogsCreateGroup  = "true",
         maxBufferSize       = "25m",
-        awslogsRegion       = "eu-central-1",
+        awslogs-region      = "eu-central-1",
         awslogsStreamPrefix = "ecs"
       }
     }
