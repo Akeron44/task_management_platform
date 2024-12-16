@@ -77,7 +77,7 @@ resource "aws_ecs_cluster" "ecs_cluster" {
 }
 
 resource "aws_ecs_capacity_provider" "ecs_capacity_provider" {
-  name = "test1"
+  name = "akeronsCapacity"
 
   auto_scaling_group_provider {
     auto_scaling_group_arn = aws_autoscaling_group.ecs_asg.arn
@@ -104,17 +104,13 @@ resource "aws_ecs_cluster_capacity_providers" "example" {
 }
 
 resource "aws_ecs_task_definition" "ecs_task_definition" {
-  family                   = "akeron-ecs-task"
-  network_mode             = "awsvpc"
-  execution_role_arn       = "arn:aws:iam::863872515231:role/ecsTaskExecutionRole"
-  cpu                      = 1024
-  memory                   = 204
-  requires_compatibilities = ["EC2"]
+  family = "akeron-ecs-task"
+
   container_definitions = jsonencode([{
     name      = "akeron-ecs-task"
     image     = "863872515231.dkr.ecr.eu-central-1.amazonaws.com/akeronecr:1.0.0"
     cpu       = 0
-    essential = true
+    essential = "true"
     portMappings = [{
       name          = "api-5000-tcp"
       containerPort = 4000
@@ -156,21 +152,26 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
         value = "postgresql://akeron:Pcvinpostgres@postgresakeron.cbjrqddvgoeg.eu-central-1.rds.amazonaws.com:5432/akerondatabase"
       }
     ],
-    # mountPoints = []
-    # volumesFrom = []
-    # logConfiguration = {
-    #   logDriver = "awslogs",
-    #   options = {
-    #     awslogs-group       = "/ecs/akeron-ecs-task",
-    #     mode                = "non-blocking",
-    #     awslogsCreateGroup  = "true",
-    #     maxBufferSize       = "25m",
-    #     awslogs-region      = "eu-central-1",
-    #     awslogsStreamPrefix = "ecs"
-    #   }
-    # }
-    # systemControls = []
+    "mountPoints" : [],
+    "volumesFrom" : [],
+    "logConfiguration" : {
+      "logDriver" : "awslogs",
+      "options" : {
+        "awslogs-group" : "/ecs/akeron-ecs-task",
+        "mode" : "non-blocking",
+        "awslogs-create-group" : "true",
+        "max-buffer-size" : "25m",
+        "awslogs-region" : "eu-central-1",
+        "awslogs-stream-prefix" : "ecs"
+      }
+    },
+    "systemControls" : []
   }])
+  network_mode             = "awsvpc"
+  execution_role_arn       = "arn:aws:iam::863872515231:role/ecsTaskExecutionRole"
+  cpu                      = 1024
+  memory                   = 204
+  requires_compatibilities = ["EC2"]
 }
 
 resource "aws_ecs_service" "ecs_service" {
