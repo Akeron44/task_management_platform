@@ -2,7 +2,7 @@ export interface TaskModalProps {
   taskId?: string;
   closeModal: () => void;
   isModalOpen: boolean;
-  isEventLoading?: boolean;
+  isTaskLoading?: boolean;
   taskData?: Task;
 }
 

@@ -3,13 +3,13 @@ import { TaskModalProps } from "../../types/TaskInterfaces";
 import TaskModal from "../TaskModal/TaskModal";
 
 function EditTaskModal({ isModalOpen, closeModal, taskId }: TaskModalProps) {
-  const { data: taskData, isLoading: isEventLoading } = useTask(taskId);
+  const { data: taskData, isLoading: isTaskLoading } = useTask(taskId);
 
   return (
     <TaskModal
       taskData={taskData}
       taskId={taskData?.id}
-      isEventLoading={isEventLoading}
+      isTaskLoading={isTaskLoading}
       isModalOpen={isModalOpen}
       closeModal={closeModal}
     />

@@ -4,10 +4,10 @@ import styles from "./TaskCard.module.css";
 import { Task } from "../../types/TaskInterfaces";
 import { useState } from "react";
 import useDeleteTask from "../../hooks/useDeleteTask";
-import error_messages from "../../../../constants/error_messages";
 import { formatStatus } from "../../helpers/formatStatus";
 import EditTaskModal from "../EditTaskModal/EditTaskModal";
 import ButtonActions from "./components/ButtonActions/ButtonActions";
+import { messages } from "../../../../constants/messages";
 
 function TaskCard({
   id,
@@ -34,7 +34,7 @@ function TaskCard({
   function handleDeleteEvent(taskId: string) {
     Modal.confirm({
       title: "Are you sure?",
-      content: error_messages.ARE_YOU_SURE_DELETE,
+      content: messages.ARE_YOU_SURE_DELETE,
       onOk: () => mutateDelete(taskId),
     });
   }

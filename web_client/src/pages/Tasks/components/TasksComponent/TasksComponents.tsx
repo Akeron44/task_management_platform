@@ -59,7 +59,7 @@ function TasksComponent({ myTasks }: Props) {
 
   return (
     <div>
-      {error && <ErrorComponent message={errorMessage} />}
+      {error && <ErrorComponent message={errorMessage}  />}
       <Statistic isLoading={isStatsLoading} stats={statsData} />
 
       <div className={styles.taskList}>
@@ -79,7 +79,7 @@ function TasksComponent({ myTasks }: Props) {
           ))
         ) : (
           <div className={styles.emptyState}>
-            <EmptyComponent message="No tasks found" />
+            <EmptyComponent message="No tasks found" myTasks={myTasks} />
           </div>
         )}
       </div>

@@ -4,10 +4,10 @@ import TaskModal from "../../pages/Tasks/components/TaskModal/TaskModal";
 
 interface Props {
   message: string;
-  myEvents?: boolean;
+  myTasks?: boolean;
 }
 
-function EmptyComponent({ message, myEvents }: Props) {
+function EmptyComponent({ message, myTasks }: Props) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   return (
     <Empty
@@ -15,9 +15,9 @@ function EmptyComponent({ message, myEvents }: Props) {
       imageStyle={{ height: 60 }}
       description={<Typography.Text>{message}</Typography.Text>}
     >
-      {myEvents && (
+      {myTasks && (
         <Button onClick={() => setIsModalOpen(true)} type="primary">
-          Create Event
+          + Add Task
         </Button>
       )}
 

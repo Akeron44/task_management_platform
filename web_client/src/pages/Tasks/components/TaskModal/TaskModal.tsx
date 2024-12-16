@@ -18,7 +18,7 @@ import DateInput from "./components/DateInput/DateInput";
 
 function TaskModal({
   taskData,
-  isEventLoading,
+  isTaskLoading,
   taskId,
   closeModal,
   isModalOpen,
@@ -65,7 +65,7 @@ function TaskModal({
     }
   };
 
-  const isLoading = isEditLoading || isCreateLoading || isEventLoading;
+  const isLoading = isEditLoading || isCreateLoading || isTaskLoading;
 
   return (
     <Modal
