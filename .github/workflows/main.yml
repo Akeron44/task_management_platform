@@ -23,7 +23,7 @@ jobs:
           npx vitest run
       - name: Build the Docker image
         working-directory: ./api
-        run: docker build . --file Dockerfile --tag akerondocker/testrop:1.0.2
+        run: docker build . --file Dockerfile --tag akerondocker/testrop:1.0.0
       - name: log in to aws
         run: |
           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -41,8 +41,8 @@ jobs:
       - name: Push image to ecr
         run: |
           aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 863872515231.dkr.ecr.eu-central-1.amazonaws.com
-          docker tag akerondocker/testrop:1.0.2 863872515231.dkr.ecr.eu-central-1.amazonaws.com/akeronecr:1.0.2
-          docker push 863872515231.dkr.ecr.eu-central-1.amazonaws.com/akeronecr:1.0.2
+          docker tag akerondocker/testrop:1.0.0 863872515231.dkr.ecr.eu-central-1.amazonaws.com/akeronecr:1.0.0
+          docker push 863872515231.dkr.ecr.eu-central-1.amazonaws.com/akeronecr:1.0.0
       - name: Create RDS Database
         working-directory: ./aws
         run: terraform apply -auto-approve -target module.rds

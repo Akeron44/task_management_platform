@@ -1,9 +1,7 @@
-
-
 resource "aws_launch_template" "ecs_lt" {
   name_prefix            = "ecs-template"
-  image_id               = "ami-06e21f90b3dce3315"
-  instance_type          = "t2.micro"
+  image_id               = "ami-0b5673b5f6e8f7fa7"
+  instance_type          = "t3.micro"
   vpc_security_group_ids = ["sg-0943ad0b8875a7e25"]
 
   iam_instance_profile {
@@ -17,7 +15,6 @@ resource "aws_launch_template" "ecs_lt" {
       volume_type = "gp2"
     }
   }
-
 
   tag_specifications {
     resource_type = "instance"
@@ -61,7 +58,7 @@ resource "aws_lb" "ecs_alb" {
 
 resource "aws_lb_listener" "ecs_alb_listener" {
   load_balancer_arn = aws_lb.ecs_alb.arn
-  port              = 4000
+  port              = 80
   protocol          = "HTTP"
 
   default_action {
@@ -125,7 +122,7 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
   container_definitions = jsonencode([
     {
       name      = "akerontask"
-      image     = "863872515231.dkr.ecr.eu-central-1.amazonaws.com/akeronecr:latest"
+      image     = "863872515231.dkr.ecr.eu-central-1.amazonaws.com/akeronecr:1.0.0"
       cpu       = 256
       memory    = 512
       essential = true
