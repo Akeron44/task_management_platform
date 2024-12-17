@@ -44,7 +44,7 @@ resource "aws_autoscaling_group" "ecs_asg" {
 resource "aws_lb" "ecs_alb" {
   name               = "akeron-alb"
   load_balancer_type = "application"
-  subnets            = ["subnet-048ed615c746deb83", "subnet-0c446972c4be90650"]
+  subnets            = ["subnet-048ed615c746deb83", "subnet-0c446972c4be90650", "subnet-0a886674953f327bc"]
 
   tags = {
     Name = "akeron-alb"
@@ -155,7 +155,7 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
   requires_compatibilities = ["EC2"]
   network_mode             = "awsvpc"
   cpu                      = "1024"
-  memory                   = "205"
+  memory                   = "2048"
 }
 
 resource "aws_ecs_service" "ecs_service" {
