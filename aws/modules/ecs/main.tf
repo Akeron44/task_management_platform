@@ -148,10 +148,6 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
       {
         name  = "DATABASE_URL"
         value = "postgresql://akeron:Pcvinpostgres@postgresakeron.cbjrqddvgoeg.eu-central-1.rds.amazonaws.com:5432/akerondatabase"
-      },
-      {
-        name = "NODE_ENV"
-        value = "production"
       }
     ]
   }])
