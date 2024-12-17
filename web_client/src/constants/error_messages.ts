@@ -61,7 +61,6 @@ const error_messages = {
     } can't be more than ${max}.`,
 
   ACTION_FAILED: (status: number) =>
-    // `This action failed with status ${status}: ${errorMessage}`,
     `Something went wrong. We're unable to process your request at the moment. (Status: ${status}) Please try again later.`,
 };
 

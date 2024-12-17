@@ -2,11 +2,11 @@ import axios from "axios";
 import error_messages from "../constants/error_messages";
 
 function getErrorMessage(message: string, statusCode: number) {
-  if (message.toLocaleLowerCase().includes("invalid credentials")) {
+  if (message.toLowerCase().includes("invalid credentials")) {
     return "Your email or password is incorrect. Please put the right credentials.";
   }
 
-  if (message.toLocaleLowerCase().includes("unauthorized")) {
+  if (message.toLowerCase().includes("unauthorized")) {
     return "Oops, something went wrong. You may be unauthorized to perform this action. Please try again later.";
   }
 
