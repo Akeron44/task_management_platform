@@ -36,6 +36,7 @@ jobs:
         run: |
           terraform init
           terraform state pull
+          terraform destroy -auto-approve -target module.ecs
           terraform apply -auto-approve -target module.ecr
       - name: Push image to ecr
         run: |
