@@ -106,7 +106,7 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
 
   container_definitions = jsonencode([{
     name  = "akeron-ecs-task"
-    image = "863872515231.dkr.ecr.eu-central-1.amazonaws.com/akeronecr:1.0.0"
+    image = "863872515231.dkr.ecr.eu-central-1.amazonaws.com/akeronecr:1.0.2"
     cpu   = 0
     portMappings = [{
       name          = "api-5000-tcp"
