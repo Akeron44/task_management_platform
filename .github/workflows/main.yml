@@ -36,7 +36,6 @@ jobs:
         run: |
           terraform init
           terraform state pull
-          terraform destroy -auto-approve -target module.ecs
           terraform apply -auto-approve -target module.ecr
       - name: Push image to ecr
         run: |
@@ -49,3 +48,21 @@ jobs:
       - name: Create the cluster
         working-directory: ./aws
         run: terraform apply -auto-approve -target module.ecs
+      - name: Upload the s3 bucket
+        working-directory: ./aws
+        run: terraform apply -auto-approve -target module.s3
+      - name: Build frontend
+        working-directory: ./web_client
+        run: |
+          npm install
+          npm run build
+      - name: Upload to s3
+        working-directory: ./web_client
+        run: |
+          aws s3 sync dist/ s3://akeronbucket --delete
+      - name: Invalidate CloudFront
+        run: |
+          CF_ID=$(terraform output -raw cloudfront_distribution_id)
+          aws cloudfront create invalidation \
+            --distribution-id ${CF_ID} \
+            --paths "/*"

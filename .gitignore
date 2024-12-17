@@ -9,6 +9,7 @@ web_client/dist-ssr
 *.local
 
 # Environment files
+api/.env
 .env
 .envz
 .env.*

@@ -8,3 +8,8 @@ output "bucket" {
   value       = aws_s3_bucket.akeron_bucket.bucket
 
 }
+
+output "cloudfront_distribution_id" {
+  description = "Cloudfront distribution id"
+  value       = aws_cloudfront_distribution.my_distribution.id
+}
