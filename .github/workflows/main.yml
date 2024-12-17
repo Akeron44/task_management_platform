@@ -51,6 +51,15 @@ jobs:
       - name: Upload the s3 bucket
         working-directory: ./aws
         run: terraform apply -auto-approve -target module.s3
+      - name: Get ALB DNS
+        working-directory: ./aws
+        run: |
+          ALB_DNS=$(terraform output -raw alb_dns_name)
+          echo "ALB_DNS=${ALB_DNS}" >> $GITHUB_ENV
+      - name: Create frontend environment
+        working-directory: ./web_client
+        run: |
+          echo "VITE_BASE_URL=http://${ALB_DNS}" > .env.production
       - name: Build frontend
         working-directory: ./web_client
         run: |
