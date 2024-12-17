@@ -64,8 +64,8 @@ resource "aws_cloudfront_distribution" "my_distribution" {
 
   default_cache_behavior {
     viewer_protocol_policy = "redirect-to-https"
-    allowed_methods        = ["GET", "HEAD"]
-    cached_methods         = ["GET", "HEAD"]
+    allowed_methods        = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+    cached_methods         = ["GET", "HEAD", "OPTIONS"]
     target_origin_id       = aws_s3_bucket.akeron_bucket.bucket
 
     compress = true
@@ -76,6 +76,7 @@ resource "aws_cloudfront_distribution" "my_distribution" {
         forward = "none"
       }
     }
+    response_headers_policy_id = aws_cloudfront_response_headers_policy.cors_policy.id
   }
   viewer_certificate {
     cloudfront_default_certificate = true
@@ -87,4 +88,28 @@ resource "aws_cloudfront_distribution" "my_distribution" {
       locations        = []
     }
   }
+}
+
+resource "aws_cloudfront_response_headers_policy" "cors_policy" {
+  name    = "corsPolicy"
+  comment = "CORS policy for Akeron application"
+
+  cors_config {
+    access_control_allow_credentials = true
+
+    access_control_allow_headers {
+      items = ["Authorization", "Content-type", "X-Amz-Date", "X-Amz-Security-Token", "X-Api-Key"]
+    }
+
+    access_control_allow_methods {
+      items = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+    }
+
+    access_control_allow_origins {
+      items = ["*"]
+    }
+
+    origin_override = true
+  }
+
 }
