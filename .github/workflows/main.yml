@@ -69,6 +69,11 @@ jobs:
         working-directory: ./web_client
         run: |
           aws s3 sync dist/ s3://akeronbucket --delete
+          - name: Create frontend environment
+          working-directory: ./web_client
+          run: |
+          CF_DOMAIN=$(terraform output -raw cloudfront_domain_name)
+          echo "VITE_BASE_URL=http://${CF_DOMAIN}" > .env.production
       - name: Invalidate CloudFront
         working-directory: ./aws
         run: |
@@ -76,8 +81,3 @@ jobs:
           aws cloudfront create invalidation \
             --distribution-id ${CF_ID} \
             --paths "/*"
-      - name: Create frontend environment
-        working-directory: ./web_client
-        run: |
-          CF_DOMAIN=$(terraform output -raw cloudfront_domain_name)
-          echo "VITE_BASE_URL=http://${CF_DOMAIN}" > .env.production
