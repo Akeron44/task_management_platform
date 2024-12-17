@@ -45,9 +45,12 @@ jobs:
       - name: Create RDS Database
         working-directory: ./aws
         run: terraform apply -auto-approve -target module.rds
+      - name: Set redeploy trigger variable
+        run: |
+          echo "REDEPLOY_TRIGGER=$(date --utc +%Y-%m-%dT%H:%M:%SZ)" >> $GITHUB_ENV
       - name: Create the cluster
         working-directory: ./aws
-        run: terraform apply -auto-approve -target module.ecs
+        run: terraform apply -auto-approve -target module.ecs -var "redeploy_trigger=${{ env.REDEPLOY_TRIGGER }}"
       - name: Upload the s3 bucket
         working-directory: ./aws
         run: terraform apply -auto-approve -target module.s3

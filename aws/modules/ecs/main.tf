@@ -158,6 +158,11 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
   memory                   = "2048"
 }
 
+variable "redeploy_trigger" {
+  type    = string
+  default = "2024-12-17T12:54:57Z"
+}
+
 resource "aws_ecs_service" "ecs_service" {
   name            = "akeron-ecs-service"
   cluster         = aws_ecs_cluster.ecs_cluster.id
@@ -175,7 +180,7 @@ resource "aws_ecs_service" "ecs_service" {
   }
 
   triggers = {
-    redeployment = timestamp()
+    redeployment = var.redeploy_trigger
   }
 
   capacity_provider_strategy {
