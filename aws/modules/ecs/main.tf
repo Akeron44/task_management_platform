@@ -155,7 +155,7 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
   requires_compatibilities = ["EC2"]
   network_mode             = "awsvpc"
   cpu                      = "1024"
-  memory                   = "2048"
+  memory                   = "800"
 }
 
 resource "aws_ecs_service" "ecs_service" {
