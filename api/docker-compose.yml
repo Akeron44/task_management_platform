@@ -3,9 +3,7 @@ services:
   postgresdb:
     image: 863872515231.dkr.ecr.eu-central-1.amazonaws.com/akeronecr:1.0.0
     restart: unless-stopped
-    ports:
-      - 4000:5432
     environment:
-      POSTGRES_USER: akeron
-      POSTGRES_PASSWORD: Pcvinpostgres
+      DATABASE_URL: postgresql://akeron:Pcvinpostgres@postgresakeron.cbjrqddvgoeg.eu-central-1.rds.amazonaws.com:5432/akerondatabase
+      PORT: 4000
       POSTGRES_DB: akerondatabase
