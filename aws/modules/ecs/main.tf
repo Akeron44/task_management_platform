@@ -149,21 +149,7 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
         name  = "DATABASE_URL"
         value = "postgresql://akeron:Pcvinpostgres@postgresakeron.cbjrqddvgoeg.eu-central-1.rds.amazonaws.com:5432/akerondatabase"
       }
-    ],
-    "mountPoints" : [],
-    "volumesFrom" : [],
-    "logConfiguration" : {
-      "logDriver" : "awslogs",
-      "options" : {
-        "awslogs-group" : "/ecs/akeron-ecs-task",
-        "mode" : "non-blocking",
-        "awslogs-create-group" : "true",
-        "max-buffer-size" : "25m",
-        "awslogs-region" : "eu-central-1",
-        "awslogs-stream-prefix" : "ecs"
-      }
-    },
-    "systemControls" : []
+    ]
   }])
   execution_role_arn       = "arn:aws:iam::863872515231:role/ecsTaskExecutionRole"
   requires_compatibilities = ["EC2"]
