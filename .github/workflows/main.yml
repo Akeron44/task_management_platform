@@ -21,6 +21,12 @@ jobs:
         run: |
           npm i  --force
           npx vitest run
+      - name: log in to aws
+        run: |
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set aws_default_region_name ${{ secrets.AWS_DEFAULT_REGION_NAME }}
+          aws configure set aws_default_output_format "json"
       - name: Create RDS Database
         working-directory: ./aws
         shell: bash
@@ -41,12 +47,6 @@ jobs:
       - name: Build the Docker image
         working-directory: ./api
         run: docker build . --file Dockerfile --tag akerondocker/testrop:1.0.2
-      - name: log in to aws
-        run: |
-          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws configure set aws_default_region_name ${{ secrets.AWS_DEFAULT_REGION_NAME }}
-          aws configure set aws_default_output_format "json"
       - name: Build the ecr
         working-directory: ./aws
         run: terraform apply -auto-approve -target module.ecr
