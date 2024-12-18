@@ -21,6 +21,7 @@ output "port" {
 }
 
 output "rds_endpoint" {
+  sensitive   = true
   description = "The database url"
   value       = "postgresql://akeron:Pcvinpostgres@postgresakeron.cbjrqddvgoeg.eu-central-1.rds.amazonaws.com:5432/akerondatabase"
 }

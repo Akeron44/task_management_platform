@@ -19,6 +19,7 @@ output "alb_dns_name" {
 }
 
 output "rds_endpoint" {
+  sensitive   = true
   description = "The url or the database"
   value       = module.rds
 }
