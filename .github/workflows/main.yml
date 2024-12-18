@@ -45,6 +45,10 @@ jobs:
       - name: Create RDS Database
         working-directory: ./aws
         run: terraform apply -auto-approve -target module.rds
+      - name: Run Prisma Migrations
+        run: |
+          npx prisma migrate deploy
+          npx prisma generate
       - name: Create the cluster
         working-directory: ./aws
         run: terraform apply -auto-approve -target module.ecs
