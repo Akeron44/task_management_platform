@@ -34,16 +34,12 @@ jobs:
           terraform init
           terraform state pull
           terraform apply -auto-approve -target module.rds
-      - name: Fetch DATABASE_URL from Terraform output
-        id: terraform_output
-        run: |
-          DATABASE_URL=$(terraform output -raw rds_endpoint) # Replace with your actual output name
-          echo "DATABASE_URL=$DATABASE_URL" >> $GITHUB_ENV
+      - name: Sey DATABASE_URL
+        run: echo "DATABASE_URL=postgresql://akeron:Pcvinpostgres@postgresakeron.cbjrqddvgoeg.eu-central-1.rds.amazonaws.com:5432/akerondatabase >> $GITHUB_ENV
       - name: Update Prisma schema with DATABASE_URL
         run: |
           # Ensure Prisma schema is updated with the correct DATABASE_URL
           sed -i "s|env(\"DATABASE_URL\")|\"${{ env.DATABASE_URL }}\"|" ./api/prisma/schema.prisma
-
       - name: Build the Docker image
         working-directory: ./api
         run: docker build . --file Dockerfile --tag akerondocker/testrop:1.0.2
