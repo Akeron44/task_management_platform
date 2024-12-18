@@ -34,8 +34,8 @@ jobs:
           terraform init
           terraform state pull
           terraform apply -auto-approve -target module.rds
-      - name: Sey DATABASE_URL
-        run: echo "DATABASE_URL=postgresql://akeron:Pcvinpostgres@postgresakeron.cbjrqddvgoeg.eu-central-1.rds.amazonaws.com:5432/akerondatabase >> $GITHUB_ENV
+      - name: Set DATABASE_URL
+        run: echo "DATABASE_URL=postgresql://akeron:Pcvinpostgres@postgresakeron.cbjrqddvgoeg.eu-central-1.rds.amazonaws.com:5432/akerondatabase" >> $GITHUB_ENV
       - name: Update Prisma schema with DATABASE_URL
         run: |
           # Ensure Prisma schema is updated with the correct DATABASE_URL
