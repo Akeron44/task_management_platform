@@ -32,11 +32,11 @@ COPY . .
 # Build the application
 RUN npm run build
 
-# Generate Prisma client
-RUN npx prisma generate
-
 # Run Prisma migrations only once when the container is deployed
 RUN npx prisma migrate deploy
+
+# Generate Prisma client
+RUN npx prisma generate
 
 # Expose the application port
 EXPOSE 4000
