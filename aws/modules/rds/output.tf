@@ -19,3 +19,8 @@ output "port" {
   description = "The port of the database"
   value       = aws_db_instance.postgresAkeron.port
 }
+
+output "rds_endpoint" {
+  description = "The database url"
+  value       = "postgresql://akeron:Pcvinpostgres@postgresakeron.cbjrqddvgoeg.eu-central-1.rds.amazonaws.com:5432/akerondatabase"
+}
