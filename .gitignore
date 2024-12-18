@@ -41,7 +41,6 @@ lerna-debug.log*
 *.sw?
 
 # Prisma
-api/prisma/migrations/
 api/prisma/*.db
 api/prisma/.env
 
