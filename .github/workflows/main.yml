@@ -36,15 +36,15 @@ jobs:
           terraform apply -auto-approve -target module.rds
       - name: Build the Docker image
         working-directory: ./api
-        run: docker build . --file Dockerfile --tag akerondocker/testrop:1.0.1
+        run: docker build . --file Dockerfile --tag akerondocker/testrop:2.0.0
       - name: Build the ecr
         working-directory: ./aws
         run: terraform apply -auto-approve -target module.ecr
       - name: Push image to ecr
         run: |
           aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 863872515231.dkr.ecr.eu-central-1.amazonaws.com
-          docker tag akerondocker/testrop:1.0.1 863872515231.dkr.ecr.eu-central-1.amazonaws.com/akeronecr:1.0.1
-          docker push 863872515231.dkr.ecr.eu-central-1.amazonaws.com/akeronecr:1.0.1
+          docker tag akerondocker/testrop:2.0.0 863872515231.dkr.ecr.eu-central-1.amazonaws.com/akeronecr:2.0.0
+          docker push 863872515231.dkr.ecr.eu-central-1.amazonaws.com/akeronecr:2.0.0
       - name: Create the cluster
         working-directory: ./aws
         run: terraform apply -auto-approve -target module.ecs
