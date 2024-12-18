@@ -17,3 +17,8 @@ output "alb_dns_name" {
   description = "The Load Balancer Dns Name"
   value       = module.ecs.alb_dns_name
 }
+
+output "rds_endpoint" {
+  description = "The url or the database"
+  value       = module.ecs.rds_endpoint
+}

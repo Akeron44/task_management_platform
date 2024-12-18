@@ -21,6 +21,23 @@ jobs:
         run: |
           npm i  --force
           npx vitest run
+      - name: Create RDS Database
+        working-directory: ./aws
+        shell: bash
+        run: |
+          terraform init
+          terraform state pull
+          terraform apply -auto-approve -target module.rds
+      - name: Fetch DATABASE_URL from Terraform output
+        id: terraform_output
+        run: |
+          DATABASE_URL=$(terraform output -raw rds_endpoint) # Replace with your actual output name
+          echo "DATABASE_URL=$DATABASE_URL" >> $GITHUB_ENV
+      - name: Update Prisma schema with DATABASE_URL
+        run: |
+          # Ensure Prisma schema is updated with the correct DATABASE_URL
+          sed -i "s|env(\"DATABASE_URL\")|\"${{ env.DATABASE_URL }}\"|" ./api/prisma/schema.prisma
+
       - name: Build the Docker image
         working-directory: ./api
         run: docker build . --file Dockerfile --tag akerondocker/testrop:1.0.2
@@ -32,19 +49,12 @@ jobs:
           aws configure set aws_default_output_format "json"
       - name: Build the ecr
         working-directory: ./aws
-        shell: bash
-        run: |
-          terraform init
-          terraform state pull
-          terraform apply -auto-approve -target module.ecr
+        run: terraform apply -auto-approve -target module.ecr
       - name: Push image to ecr
         run: |
           aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 863872515231.dkr.ecr.eu-central-1.amazonaws.com
           docker tag akerondocker/testrop:1.0.2 863872515231.dkr.ecr.eu-central-1.amazonaws.com/akeronecr:1.0.2
           docker push 863872515231.dkr.ecr.eu-central-1.amazonaws.com/akeronecr:1.0.2
-      - name: Create RDS Database
-        working-directory: ./aws
-        run: terraform apply -auto-approve -target module.rds
       - name: Create the cluster
         working-directory: ./aws
         run: terraform apply -auto-approve -target module.ecs
