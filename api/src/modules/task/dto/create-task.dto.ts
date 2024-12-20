@@ -6,24 +6,26 @@ import {
   IsDate,
   IsNotEmpty,
   MinDate,
-} from 'class-validator';
-import { Priority, TaskStatus } from '@prisma/client';
-import { error_messages } from '../../../common/constants/error-messages';
-import { Type } from 'class-transformer';
-import { ApiProperty } from '@nestjs/swagger';
+  IsISO8601,
+  isISO8601,
+} from "class-validator";
+import { Priority, TaskStatus } from "@prisma/client";
+import { error_messages } from "../../../common/constants/error-messages";
+import { Transform, Type } from "class-transformer";
+import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateTaskDto {
   @ApiProperty()
   @IsNotEmpty()
-  @MinLength(3, { message: error_messages.MIN_CHARACTERS('title', 3) })
-  @MaxLength(50, { message: error_messages.MAX_CHARACTERS('title', 50) })
+  @MinLength(3, { message: error_messages.MIN_CHARACTERS("title", 3) })
+  @MaxLength(50, { message: error_messages.MAX_CHARACTERS("title", 50) })
   @IsString()
   title: string;
 
   @ApiProperty()
   @IsNotEmpty()
-  @MinLength(5, { message: error_messages.MIN_CHARACTERS('title', 5) })
-  @MaxLength(255, { message: error_messages.MAX_CHARACTERS('title', 255) })
+  @MinLength(5, { message: error_messages.MIN_CHARACTERS("title", 5) })
+  @MaxLength(255, { message: error_messages.MAX_CHARACTERS("title", 255) })
   @IsString()
   description: string;
 
@@ -46,7 +48,6 @@ export class CreateTaskDto {
   @Type(() => Date)
   @IsDate()
   @MinDate(new Date(new Date().setHours(0, 0, 0, 0)), {
-    message: 'Due date must be today or a future date',
-  })
-  dueDate: Date;
+    message: "Due date must be today or a future date",
+  })  dueDate: Date;
 }

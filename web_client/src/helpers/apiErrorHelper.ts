@@ -1,13 +1,17 @@
 import axios from "axios";
 import error_messages from "../constants/error_messages";
 
-function getErrorMessage(message: string, statusCode: number) {
-  if (message.toLowerCase().includes("invalid credentials")) {
-    return "Your email or password is incorrect. Please put the right credentials.";
-  }
+function getErrorMessage(message: string | string[], statusCode: number) {
+  if (typeof message === "string") {
+    if (message.toLowerCase().includes("invalid credentials")) {
+      return error_messages.INVALID_CREDENTIALS;
+    }
 
-  if (message.toLowerCase().includes("unauthorized")) {
-    return "Oops, something went wrong. You may be unauthorized to perform this action. Please try again later.";
+    if (message.toLowerCase().includes("unauthorized")) {
+      return error_messages.OOPS_SOMETHING_WENT_WRONG;
+    }
+  } else if (message.length !== 0) {
+    return message[0];
   }
 
   return error_messages.ACTION_FAILED(statusCode);

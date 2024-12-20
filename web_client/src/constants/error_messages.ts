@@ -22,6 +22,12 @@ const error_messages = {
   PASSWORD_NUMBER: "Password must have at least one number",
   PASSWORD_SYMBOL: "Password must have at least one symbol",
 
+  OOPS_SOMETHING_WENT_WRONG:
+    "Oops, something went wrong. You may be unauthorized to perform this action. Please try again later.",
+
+  INVALID_CREDENTIALS:
+    "Your email or password is incorrect. Please put the right credentials.",
+
   HAS_TO_BE: (entity: string) =>
     `This field has to be an ${entity.toLowerCase()}`,
 
