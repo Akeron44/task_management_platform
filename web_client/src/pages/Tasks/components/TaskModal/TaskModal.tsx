@@ -15,7 +15,6 @@ import DescriptionInput from "./components/DescriptionInput/DescriptionInput";
 import PrioritySelect from "./components/PrioritySelect/PrioritySelect";
 import StatusSelect from "./components/StatusSelect/StatusSelect";
 import DateInput from "./components/DateInput/DateInput";
-import dayjs from "dayjs";
 
 function TaskModal({
   taskData,
@@ -45,7 +44,7 @@ function TaskModal({
         description: taskData.description,
         priority: taskData.priority,
         status: taskData.status,
-        dueDate: dayjs(taskData.dueDate).format(),
+        dueDate: taskData.dueDate,
       });
     }
   }, [reset, taskData, taskId]);
@@ -56,7 +55,7 @@ function TaskModal({
       description: form.description,
       status: form.status,
       priority: form.priority,
-      dueDate: dayjs(form.dueDate).utc().format(),
+      dueDate: form.dueDate,
     };
 
     if (taskId) {

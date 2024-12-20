@@ -48,6 +48,7 @@ export class CreateTaskDto {
   @Type(() => Date)
   @IsDate()
   @MinDate(new Date(new Date().setHours(0, 0, 0, 0)), {
-    message: "Due date must be today or a future date",
-  })  dueDate: Date;
+    message: "Deadline must be today or a future date",
+  })
+  dueDate: Date;
 }

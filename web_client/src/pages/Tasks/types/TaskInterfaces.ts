@@ -29,7 +29,7 @@ export interface CreateTask {
   description: string;
   priority?: "LOW" | "MEDIUM" | "HIGH";
   status?: "PENDING" | "IN_PROGRESS" | "COMPLETED" | "CANCELLED";
-  dueDate: string;
+  dueDate: Date;
 }
 
 export interface DefaultValues {
